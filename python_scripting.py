@@ -20,4 +20,6 @@ output = device_access.recv(65535)
 
 print(output.decode())
 
+
+
 ssh_client.close()
