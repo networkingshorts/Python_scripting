@@ -21,10 +21,11 @@ for cmd in config:
     device_access.send(f"{cmd}\n")
     output = device_access.recv(65535)
     time.sleep(1)
-    print(output.decode())
+    print(output.decode(), end='')
 
 device_access.send("show run int lo100\n")
 time.sleep(2)
 output = device_access.recv(65535)
 print(output.decode())
 ssh_client.close()
+
