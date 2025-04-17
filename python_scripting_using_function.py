@@ -8,18 +8,21 @@ ssh_client.set_missing_host_key_policy(client.AutoAddPolicy())
 juniper_cmd = ['conf t', 'router ospf 1', 'commit','end']
 cisco_cmd = ['show ip interface brief','conf t','int g0/0/0/0','ip address 100.100.100.1 255.255.255.255','no shut','end']
 
-def cisco_ios_xr():
-    username = 'admin'
-    hostname = 'sandbox-iosxr-1.cisco.com'
-    password = 'C1sco12345'
+
+username = 'admin'
+hostname = 'sandbox-iosxr-1.cisco.com'
+password = 'C1sco12345'
+
+def cisco_ios_xr(hostname,cmd):
+    
 
     ssh_client.connect(hostname = hostname, username = username, password = password, port = 22, look_for_keys= False)
     print(f"Device is successfully connected to {hostname}")
     device_access = ssh_client.invoke_shell()
     device_access.send("terminal len 0 \n")
-    for cmd in cisco_cmd:
+    for command in cmd:
 
-        device_access.send(f"{cmd}\n")
+        device_access.send(f"{command}\n")
         time.sleep(2)
         output = device_access.recv(65535)
         print(output.decode())
@@ -30,7 +33,7 @@ def cisco_ios_xr():
     ssh_client.close()
 
 
-cisco_ios_xr()
+cisco_ios_xr('sandbox-iosxr-1.cisco.com',cisco_cmd)
 
 def juniper():
     username = 'admin'
@@ -53,7 +56,7 @@ def juniper():
     print(output.decode(),end="")
     ssh_client.close()
 
-juniper()
+#juniper()
 
 
 
