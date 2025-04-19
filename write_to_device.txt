@@ -1,0 +1,7 @@
+conf t
+interface Loopback110
+ip address 110.110.110.1 255.255.255.255
+no shutdown
+commit
+end
+show ip interface brief
