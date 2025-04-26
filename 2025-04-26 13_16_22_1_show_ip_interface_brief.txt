@@ -1,0 +1,35 @@
+
+
+RP/0/RP0/CPU0:Demo-Router#terminal length 0
+Sat Apr 26 08:40:52.404 UTC
+RP/0/RP0/CPU0:Demo-Router#show ip interface brief
+Sat Apr 26 08:40:54.393 UTC
+
+Interface                      IP-Address      Status          Protocol Vrf-Name
+Bundle-Ether1                  unassigned      Down            Down     default 
+Bundle-Ether12                 unassigned      Down            Down     default 
+Bundle-Ether1.3540             unassigned      Down            Down     ABC     
+Bundle-Ether12.3540            unassigned      Down            Down     ABC     
+Loopback0                      10.199.101.153  Shutdown        Down     default 
+Loopback42                     unassigned      Up              Up       default 
+Loopback50                     192.168.0.1     Up              Up       default 
+Loopback51                     192.168.1.1     Up              Up       default 
+Loopback52                     192.168.2.1     Up              Up       default 
+Loopback53                     192.168.3.1     Up              Up       default 
+Loopback54                     192.168.4.1     Up              Up       default 
+Loopback100                    100.100.100.1   Up              Up       default 
+Loopback101                    101.101.101.1   Up              Up       default 
+Loopback102                    10.102.102.102  Up              Up       TWAMP-Light
+Loopback103                    10.101.101.101  Up              Up       TWAMP-Light
+Loopback110                    110.110.110.1   Up              Up       default 
+Loopback555                    unassigned      Up              Up       default 
+MgmtEth0/RP0/CPU0/0            10.10.20.175    Up              Up       default 
+GigabitEthernet0/0/0/0         unassigned      Shutdown        Down     default 
+GigabitEthernet0/0/0/1         unassigned      Shutdown        Down     default 
+GigabitEthernet0/0/0/2         unassigned      Shutdown        Down     default 
+GigabitEthernet0/0/0/3         unassigned      Shutdown        Down     default 
+GigabitEthernet0/0/0/4         unassigned      Shutdown        Down     default 
+GigabitEthernet0/0/0/5         unassigned      Shutdown        Down     default 
+GigabitEthernet0/0/0/6         10.0.1.1        Down            Down     default 
+GigabitEthernet0/0/0/6.1       unassigned      Down            Down     default 
+RP/0/RP0/CPU0:Demo-Router#

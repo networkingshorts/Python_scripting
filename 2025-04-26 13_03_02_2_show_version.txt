@@ -1,0 +1,4 @@
+          RP/0/RP0/CPU0:Demo-Router#how version
+                           ^
+% Invalid input detected at '^' marker.
+RP/0/RP0/CPU0:Demo-Router#

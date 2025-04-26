@@ -1,0 +1,437 @@
+show running-config
+Sat Apr 26 08:40:56.417 UTC
+Building configuration...
+!! IOS XR Configuration 7.3.2
+!! Last configuration change at Sat Apr 26 07:56:27 2025 by admin
+!
+hostname Demo-Router
+snmp-server traps alarm
+banner motd "Hello there! Hoping you are having a great day
+... Welcome to '$(hostname)',
+your favorite CISCO.IOSXR.IOSXR Sandbox"
+username admin
+ group root-lr
+ group cisco-support
+ secret 10 $6$F3kfY1/w8tjGCY1.$MC31GMZoTQZw/QaXJACQZYJltYllPSYCC9LRzzhxb5Zn9X.mWWUezTo/kXORs3JsM/0ttm3peLBijGR83osQ9/
+!
+grpc
+ port 57777
+ no-tls
+ address-family ipv4
+ max-request-total 256
+ max-request-per-user 32
+!
+telemetry model-driven
+ destination-group EXAMPLE-DESTINATION
+  destination 9.9.9.9 port 57000
+   encoding self-describing-gpb
+   protocol grpc no-tls
+  !
+ !
+ sensor-group EXAMPLE-SENSOR-GROUP
+  sensor-path Cisco-IOS-XR-wdsysmon-fd-oper:system-monitoring/cpu-utilization/total-cpu-one-minute
+  sensor-path Cisco-IOS-XR-wdsysmon-fd-oper:system-monitoring/cpu-utilization/total-cpu-five-minute
+ !
+ subscription EXAMPLE-SUBSCRIPTION
+  sensor-group-id EXAMPLE-SENSOR-GROUP sample-interval 6000
+  destination-id EXAMPLE-DESTINATION
+ !
+!
+vrf ABC
+ description Customer CZ insurance
+ rd 3541:100
+ address-family ipv4 unicast
+ !
+!
+vrf testtt
+ address-family ipv4 unicast
+ !
+!
+vrf SOITEST
+ address-family ipv4 unicast
+ !
+!
+vrf 244000000
+ description Subject1
+ rd 41:244000000
+ address-family ipv4 unicast
+ !
+!
+vrf TWAMP-Light
+ address-family ipv4 unicast
+  import route-target
+   100:100
+  !
+  export route-target
+   100:200
+  !
+ !
+!
+address-family ipv4 unicast
+!
+line console
+ exec-timeout 0 0
+ width 511
+ absolute-timeout 0
+ session-timeout 0
+!
+line default
+ exec-timeout 0 0
+ absolute-timeout 0
+ session-timeout 0
+!
+snmp-server community public RO
+snmp-server traps rf
+snmp-server traps bfd
+snmp-server traps ntp
+snmp-server traps copy-complete
+snmp-server traps snmp linkup
+snmp-server traps snmp linkdown
+snmp-server traps snmp coldstart
+snmp-server traps snmp warmstart
+snmp-server traps snmp authentication
+snmp-server traps flash removal
+snmp-server traps flash insertion
+snmp-server traps power
+snmp-server traps config
+snmp-server traps entity
+snmp-server traps selective-vrf-download role-change
+snmp-server traps syslog
+snmp-server traps system
+snmp-server traps diameter peerup
+snmp-server traps diameter peerdown
+snmp-server traps diameter protocolerror
+snmp-server traps diameter permanentfail
+snmp-server traps diameter transientfail
+snmp-server traps bridgemib
+snmp-server traps addrpool low
+snmp-server traps addrpool high
+snmp-server traps cisco-entity-ext
+snmp-server traps entity-state operstatus
+snmp-server traps entity-state switchover
+snmp-server traps entity-redundancy all
+snmp-server traps entity-redundancy status
+snmp-server traps entity-redundancy switchover
+snmp-server location "Main Data Center"
+ntp
+ server 132.163.97.5 prefer
+ server 192.0.2.1
+!
+call-home
+ service active
+ contact smart-licensing
+ profile CiscoTAC-1
+  active
+  destination transport-method http
+ !
+!
+netconf-yang agent
+ ssh
+!
+ipv4 access-list TEST_ACL
+ 10 permit udp any any eq bfd
+ 20 permit udp any any eq 3785
+ 30 permit udp any any eq 4784
+!
+ipv4 access-list extended
+ 10 permit udp 10.0.0.0 0.0.0.255 gt 1023 10.1.0.0 0.0.0.255 eq 443
+ 15 permit udp 10.0.0.0 0.0.0.255 gt 1023 10.1.0.0 0.0.0.255 eq ssh
+!
+policy-map Youtube_IN
+ class class-default
+  police rate 50 mbps burst 50 mbytes 
+   conform-action transmit
+   exceed-action drop
+  ! 
+ ! 
+ end-policy-map
+! 
+policy-map Youtube_OUT
+ class class-default
+  police rate 50 mbps burst 50 mbytes 
+   conform-action transmit
+   exceed-action drop
+  ! 
+ ! 
+ end-policy-map
+! 
+interface Bundle-Ether1
+!
+interface Bundle-Ether1.3540
+ vrf ABC
+ encapsulation dot1q 3540
+!
+interface Bundle-Ether12
+!
+interface Bundle-Ether12.3540
+ vrf ABC
+ encapsulation dot1q 3540
+!
+interface Loopback0
+ ipv4 address 10.199.101.153 255.255.255.240
+ shutdown
+!
+interface Loopback42
+ description Configured with pygnmi
+!
+interface Loopback50
+ description Configured by Ansible - Loopback50
+ ipv4 address 192.168.0.1 255.255.255.0
+ ipv6 address 1234::1/128
+!
+interface Loopback51
+ description Configured by Ansible - Loopback51
+ ipv4 address 192.168.1.1 255.255.255.0
+!
+interface Loopback52
+ description Configured by Ansible - Loopback52
+ ipv4 address 192.168.2.1 255.255.255.0
+!
+interface Loopback53
+ description Configured by Ansible - Loopback53
+ ipv4 address 192.168.3.1 255.255.255.0
+!
+interface Loopback54
+ description Configured by Ansible - Loopback54
+ ipv4 address 192.168.4.1 255.255.255.0
+!
+interface Loopback100
+ description ***TEST LOOPBACK****
+ ipv4 address 100.100.100.1 255.255.255.255
+!
+interface Loopback101
+ ipv4 address 101.101.101.1 255.255.255.0
+!
+interface Loopback102
+ description "TWAMP Loopback for EF”
+ vrf TWAMP-Light
+ ipv4 address 10.102.102.102 255.255.255.255
+!
+interface Loopback103
+ description "TWAMP Loopback for BE”
+ vrf TWAMP-Light
+ ipv4 address 10.101.101.101 255.255.255.255
+!
+interface Loopback110
+ description Configured by Ansible
+ ipv4 address 110.110.110.1 255.255.255.255
+!
+interface Loopback555
+ description PRUEBA_KV
+!
+interface MgmtEth0/RP0/CPU0/0
+ ipv4 address 10.10.20.175 255.255.255.0
+!
+interface GigabitEthernet0/0/0/0
+ bundle id 1 mode on
+ shutdown
+!
+interface GigabitEthernet0/0/0/1
+ description test
+ bundle id 12 mode on
+ shutdown
+!
+interface GigabitEthernet0/0/0/2
+ description test
+ shutdown
+!
+interface GigabitEthernet0/0/0/3
+ description test
+ shutdown
+!
+interface GigabitEthernet0/0/0/4
+ shutdown
+!
+interface GigabitEthernet0/0/0/5
+ shutdown
+!
+interface GigabitEthernet0/0/0/6
+ ipv4 address 10.0.1.1 255.255.255.0
+!
+interface GigabitEthernet0/0/0/6.1
+ encapsulation dot1q 3540
+!
+interface preconfigure FastEthernet0/0/0/0
+ ipv4 address 192.168.1.1 255.255.255.0
+!
+router static
+ address-family ipv4 unicast
+  0.0.0.0/0 10.10.20.254
+  0.0.0.0/0 MgmtEth0/RP0/CPU0/0 10.10.20.254
+ !
+!
+router isis 70
+ address-family ipv4 unicast
+ !
+ address-family ipv6 unicast
+  single-topology
+ !
+!
+router isis 77
+ is-type level-2-only
+ net 48.0000.1234.1234.00
+ address-family ipv4 unicast
+  metric-style wide
+ !
+ address-family ipv6 unicast
+  single-topology
+ !
+ interface Loopback50
+  address-family ipv4 unicast
+  !
+  address-family ipv6 unicast
+  !
+ !
+!
+router isis COLT
+ is-type level-2-only
+ net 49.0001.0000.0000.0001.00
+ address-family ipv4 unicast
+  metric-style wide
+  mpls traffic-eng router-id Loopback0
+  segment-routing mpls
+ !
+ interface GigabitEthernet0/0/0/0
+  point-to-point
+  address-family ipv4 unicast
+   adjacency-sid absolute 200003
+  !
+ !
+ interface GigabitEthernet0/0/0/1
+  address-family ipv4 unicast
+   adjacency-sid absolute 200002
+  !
+ !
+ interface GigabitEthernet0/0/0/2
+  address-family ipv4 unicast
+   adjacency-sid absolute 200004
+  !
+ !
+ interface GigabitEthernet0/0/0/3
+  address-family ipv4 unicast
+   adjacency-sid absolute 200001
+  !
+ !
+ interface GigabitEthernet0/0/0/4
+  point-to-point
+  address-family ipv4 unicast
+   adjacency-sid absolute 200000
+  !
+ !
+!
+snmp-server traps isis all
+snmp-server traps ospfv3 errors bad-packet
+snmp-server traps ospfv3 errors config-error
+snmp-server traps ospfv3 errors virt-bad-packet
+snmp-server traps ospfv3 state-change if-state-change
+snmp-server traps ospfv3 state-change neighbor-state-change
+snmp-server traps ospfv3 state-change virtif-state-change
+snmp-server traps ospfv3 state-change virtneighbor-state-change
+snmp-server traps ospfv3 state-change restart-status-change
+snmp-server traps ospfv3 state-change restart-virtual-helper-status-change
+router ospf 1
+!
+snmp-server traps bgp cbgp2
+snmp-server traps bgp
+router bgp 65530
+ bfd minimum-interval 50
+ bfd multiplier 3
+ bgp router-id 10.242.0.41
+ address-family ipv4 unicast
+ !
+ address-family vpnv4 unicast
+ !
+ vrf 244000000
+  address-family ipv4 unicast
+  !
+ !
+ vrf TWAMP-Light
+  rd 10.101.101.101:200
+  address-family ipv4 unicast
+   redistribute connected
+  !
+ !
+!
+snmp-server traps hsrp
+snmp-server traps vrrp events
+snmp-server traps vpls all
+snmp-server traps vpls status
+snmp-server traps vpls full-clear
+snmp-server traps vpls full-raise
+snmp-server traps l2vpn all
+snmp-server traps l2vpn vc-up
+snmp-server traps l2vpn vc-down
+snmp-server traps mpls traffic-eng up
+snmp-server traps mpls traffic-eng down
+snmp-server traps mpls traffic-eng reroute
+snmp-server traps mpls traffic-eng reoptimize
+snmp-server traps mpls frr all
+snmp-server traps mpls frr protected
+snmp-server traps mpls frr unprotected
+snmp-server traps mpls ldp up
+snmp-server traps mpls ldp down
+snmp-server traps mpls ldp threshold
+snmp-server traps mpls traffic-eng p2mp up
+snmp-server traps mpls traffic-eng p2mp down
+snmp-server traps rsvp all
+snmp-server traps rsvp new-flow
+snmp-server traps rsvp lost-flow
+snmp-server traps mpls l3vpn all
+snmp-server traps mpls l3vpn vrf-up
+snmp-server traps mpls l3vpn vrf-down
+snmp-server traps mpls l3vpn max-threshold-cleared
+snmp-server traps mpls l3vpn max-threshold-exceeded
+snmp-server traps mpls l3vpn mid-threshold-exceeded
+snmp-server traps mpls l3vpn max-threshold-reissue-notif-time 1
+mpls traffic-eng
+ interface Loopback0
+ !
+!
+snmp-server traps pim neighbor-change
+snmp-server traps pim invalid-message-received
+snmp-server traps pim rp-mapping-change
+snmp-server traps pim interface-state-change
+snmp-server traps msdp peer-state-change
+segment-routing
+!
+xml agent tty
+ iteration off
+!
+snmp-server traps sensor
+snmp-server traps fru-ctrl
+netconf agent tty
+!
+snmp-server traps ospf lsa lsa-maxage
+snmp-server traps ospf lsa lsa-originate
+snmp-server traps ospf errors bad-packet
+snmp-server traps ospf errors authentication-failure
+snmp-server traps ospf errors config-error
+snmp-server traps ospf errors virt-bad-packet
+snmp-server traps ospf errors virt-authentication-failure
+snmp-server traps ospf errors virt-config-error
+snmp-server traps ospf retransmit packets
+snmp-server traps ospf retransmit virt-packets
+snmp-server traps ospf state-change if-state-change
+snmp-server traps ospf state-change neighbor-state-change
+snmp-server traps ospf state-change virtif-state-change
+snmp-server traps ospf state-change virtneighbor-state-change
+snmp-server traps l2tun sessions
+snmp-server traps l2tun tunnel-up
+snmp-server traps l2tun tunnel-down
+snmp-server traps l2tun pseudowire status
+snmp-server traps pki
+snmp-server traps ipsec tunnel stop
+snmp-server traps ipsec tunnel start
+snmp-server traps isakmp tunnel stop
+snmp-server traps isakmp tunnel start
+ssh server v2
+ssh server vrf default
+ssh server netconf vrf default
+snmp-server traps ipsla
+performance-measurement
+!
+snmp-server traps subscriber session-agg node
+snmp-server traps subscriber session-agg access-interface
+end
+
+RP/0/RP0/CPU0:Demo-Router#
