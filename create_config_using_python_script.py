@@ -1,5 +1,10 @@
 from paramiko import client
 import time
+import socket
+
+ip = socket.gethostbyname('sandbox-iosxr-1.cisco.com')
+print(ip)
+
 
 username = 'admin'
 hostname='sandbox-iosxr-1.cisco.com'
