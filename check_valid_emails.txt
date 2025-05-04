@@ -1,0 +1,6 @@
+tonu_123.shk@gmail.com
+john.doe@example.com
+invalid-email@.com
+alice99@domain.co.uk
+user@localhost
+123@456.789
