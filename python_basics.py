@@ -135,7 +135,7 @@ for num in largest_num:
     elif num > second_largest:
     #elif num > second_largest and num !=largest:
         second_largest = num
-print(second_largest)
+#print(second_largest)
 
 '''✅ num > second_largest
 This checks if the current number is bigger than the current second largest.
@@ -160,3 +160,101 @@ Output: "192.168.1.11"'''
 #print(split_IP_address_2)
 #new_ip=".".join(split_IP_address_2)
 #print(new_ip)
+'''l=[1,2,3,4]
+print(type(l))
+
+import array as arr
+a = arr.array[1,2,3]
+#print(type(a))
+
+set_1 = {1,2,3}
+print(set_1[1])'''
+
+
+'''input_string = "Tauheed Shaikh is learning Python"
+chars_to_count = ['t', 'T', 'a', 'n']  # You can include any characters you want
+
+# Create a dictionary to store counts
+char_counts = {}
+
+for char in chars_to_count:
+    char_counts[char] = input_string.count(char)
+
+# Print the counts
+for key, value in char_counts.items():
+    print(f"{key}: {value}")
+    
+    
+    input_string = "Tauheed is doing not good in Python"
+input_string_lower= input_string.lower()
+print(input_string_lower)
+Char_to_Count = ["t","p","e","o"]
+
+Char_key_value={}
+
+for char in Char_to_Count:
+    Char_key_value[char] = input_string_lower.count(char)
+print(Char_key_value)'''
+
+
+'''Python_string = "Python is a Programming Language"
+#output {m:2}
+count_char= ["P","t","g","m","a"]
+
+counting_char= {}
+
+for char in count_char:
+    counting_char[char] = Python_string.count(char)
+print(counting_char)
+
+{'P': 2, 't': 1, 'g': 4, 'm': 2, 'a': 4}
+
+'''
+
+'''dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 2, 'c': 4, 'd': 5}
+#print(dict1.keys())
+intersection = {}
+#print(dict1['a'])
+for key in dict1:
+    if key in dict2 and dict1[key] == dict2[key]:
+        intersection[key]=dict1[key]
+
+print(intersection)'''
+
+dict1 = {'a': 1, 'b': 2, 'c': 3}
+dict2 = {'b': 2, 'c': 4, 'd': 5}
+
+# Find common keys
+common = dict1.keys() & dict2.keys()
+
+# Create cleaned versions of both dicts
+dict1_clean = {}
+dict2_clean = {}
+
+for k in dict1:
+    if k not in common:
+        dict1_clean[k] = dict1[k]
+
+for k in dict2:
+    if k not in common:
+        dict2_clean[k] = dict2[k]
+
+# Merge the cleaned dictionaries
+result = dict1_clean.copy()
+result.update(dict2_clean)
+
+print(result)  # {'a': 1, 'd': 5}
+
+
+
+
+'''Lists and tuples in Python differ significantly in their memory allocation strategies due to their 
+mutability. Lists, being mutable, are allocated more memory than they currently need to accommodate 
+potential appends or removals. This pre-allocation avoids frequent reallocations, enhancing 
+performance during modifications. However, it results in higher memory consumption compared to tuples.
+Tuples, on the other hand, are immutable, meaning their size and contents are fixed upon creation. 
+This allows Python to allocate only the necessary memory to store the tuple's elements, leading to more 
+memory-efficient storage, especially when dealing with a large number of elements. Furthermore, because 
+tuples are immutable, they can sometimes take advantage of certain optimizations, such as interning for 
+small tuples, which can further reduce memory usage by sharing memory with identical tuples.'''
