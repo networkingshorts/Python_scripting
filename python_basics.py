@@ -258,3 +258,44 @@ This allows Python to allocate only the necessary memory to store the tuple's el
 memory-efficient storage, especially when dealing with a large number of elements. Furthermore, because 
 tuples are immutable, they can sometimes take advantage of certain optimizations, such as interning for 
 small tuples, which can further reduce memory usage by sharing memory with identical tuples.'''
+
+
+sort_string='bca'
+sort_list_string = list(sort_string)
+sort_list_string.sort()
+print(sort_list_string)
+
+'''my_list = ["b", "c", "a"]
+sorted_list = my_list.sort()  # WRONG: sorted_list will be None
+print(sorted_list)            # Output: None
+Correct Ways to Sort:
+Option 1: Sort in-place
+
+my_list = ["b", "c", "a"]
+my_list.sort()
+print(my_list)  # Output: ['a', 'b', 'c']
+Option 2: Use sorted() to get a new sorted list
+
+my_list = ["b", "c", "a"]
+sorted_list = sorted(my_list)
+print(sorted_list)  # Output: ['a', 'b', 'c']'''
+
+
+s = "banana"
+distinct_chars = set(s)
+print(len(distinct_chars))
+#output is 3
+
+'''set does not add duplicate characters ?
+
+
+ChatGPT said:
+Exactly — in Python, a set does not allow duplicate elements. When you convert a string to a set, 
+it keeps only one copy of each character.'''
+
+'''index_list=['a', 'b', 'c']
+index = [1,2,3]
+zipped = list(zip(index_list,index))
+print(zipped)
+
+#[('a', 1), ('b', 2), ('c', 3)]'''
