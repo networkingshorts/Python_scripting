@@ -299,3 +299,91 @@ zipped = list(zip(index_list,index))
 print(zipped)
 
 #[('a', 1), ('b', 2), ('c', 3)]'''
+
+#Write a python code if the number is even or odd
+
+Number = int(input("Enter a Number: "))
+if Number%2==0:
+    print(f"{Number} is an Even Number")
+else:
+    print(f'{Number} is an Odd Number')
+
+
+    '''
+    == (Equality Operator)
+Purpose: Compares values to check if they are equal.
+
+    a = [1, 2, 3]
+b = [1, 2, 3]
+print(a == b)  # True, because the contents are the same
+
+is (Identity Operator)
+Purpose: Checks whether two variables point to the same object in memory.
+
+a = [1, 2, 3]
+b = [1, 2, 3]
+print(a is b)  # False, because they are different objects
+
+    '''
+
+
+mutable = [1,2,3,4,5]
+unmutable=(1,2,3,4,5)
+mutable.insert(5,789)
+mutable.pop(0)
+#[2, 3, 4, 5, 789]
+mutable.append(100)
+#[2, 3, 4, 5, 789, 100]
+mutable.reverse()
+#[100, 789, 5, 4, 3, 2]
+mutable.clear()
+#[]
+print(mutable)
+
+
+string1 = "    Write Python 3 code in this online editor and run it.    "
+ 
+
+print(string1.lower())
+#write python 3 code in this online editor and run it.
+print(string1.upper())
+#WRITE PYTHON 3 CODE IN THIS ONLINE EDITOR AND RUN IT.
+print(string1.capitalize())
+#Write python 3 code in this online editor and run it.
+
+print(string1.title())
+#Write Python 3 Code In This Online Editor And Run It.
+
+print(string1.strip())
+#removes the start and end spaces from the string
+
+print(string1.lstrip())
+#removes left side spaces from string
+
+
+print(string1.rstrip())
+#removes right side spaces from string
+
+print(string1.count("r"))
+#3
+
+string_vowel = "Online Python compiler (interpreter) to run Python online."
+vowels = 'aeiouAEIOU'
+
+count_vowels = 0
+
+for i in string_vowel:
+    if i in vowels:
+        count_vowels += 1
+print(count_vowels)
+
+
+
+#write a program to merge two dictionaries
+dict1 = {"name":"Tauheed","surname":"Shaikh","Age":26}
+dict2 = {"profession":"Engineer","Field":"Networking"}
+
+'''dict3 = dict1.update(dict2)
+sets dict3 to None, because dict1.update(dict2) returns None.'''
+dict1.update(dict2)
+print(dict1)
