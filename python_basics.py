@@ -387,3 +387,13 @@ dict2 = {"profession":"Engineer","Field":"Networking"}
 sets dict3 to None, because dict1.update(dict2) returns None.'''
 dict1.update(dict2)
 print(dict1)
+
+
+list_tuple = [(1,2),(3,4),(5,6)]
+new_list=[]
+for pair in list_tuple:
+    for x in pair:
+        new_list.append(x)
+print(new_list)
+
+#[1, 2, 3, 4, 5, 6]
